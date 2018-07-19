@@ -1,25 +1,26 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ApolloProvider } from 'react-apollo';
-import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
-import AllTodos from './AllTodos';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import CreateCategory from './components/CreateCategory';
+import Categories from './components/Categories';
+import CreateArticle from './components/CreateArticle';
+import EditArticle from './components/EditArticle';
+import Articles from './components/Articles';
 
 
-class App extends Component {
-  render() {
-    const client = new ApolloClient({
-      link: new HttpLink({ uri: 'https://fakerql.com/' }),
-      cache: new InMemoryCache()
-  });
-    return (
-      <ApolloProvider client={client}>
-        <div>
-          <AllTodos />
-        </div>
-      </ApolloProvider>
-    );
-  }
+const App = (props) => {
+  return (
+    <BrowserRouter>
+    <div>
+      <Switch>
+          <Route exact path='/' component={CreateCategory} />
+          <Route exact path='/categories' component={Categories} />
+          <Route exact path='/create_article' component={CreateArticle} />
+          <Route exact path='/articles' component={Articles} />
+          <Route exact path='/edit_article' component={EditArticle} />
+      </Switch>
+    </div>
+    </BrowserRouter>
+  )
 }
 
 export default App;
